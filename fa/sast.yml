@@ -1,0 +1,5 @@
+mode: basic
+export:
+  format: txt
+  output: sast_result.txt
+

@@ -1,0 +1,20 @@
+name: SAST & SCA Strict (Fail)
+on:
+  workflow_dispatch:
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run SAST (strict fail)
+        uses: docker://fluidattacks/sast:latest
+        with:
+          args: scan /workspace --config /workspace/fa/sast_strict.yml
+
+      - name: Run SCA (strict fail)
+        uses: docker://fluidattacks/sca:latest
+        with:
+          args: scan /workspace --config /workspace/fa/sca_strict.yml

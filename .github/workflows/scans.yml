@@ -1,0 +1,20 @@
+name: SAST & SCA Normal
+on:
+  workflow_dispatch:
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run SAST (normal)
+        uses: docker://fluidattacks/sast:latest
+        with:
+          args: scan /github/workspace --config /github/workspace/fa/sast.yml
+
+      - name: Run SCA (normal)
+        uses: docker://fluidattacks/sca:latest
+        with:
+          args: scan /github/workspace --config /github/workspace/fa/sca.yml
