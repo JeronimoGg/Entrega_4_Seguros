@@ -1,8 +1,6 @@
 name: SAST & SCA Strict (Fail)
 
 on:
-  push:
-  pull_request:
   workflow_dispatch:
 
 jobs:
@@ -18,8 +16,9 @@ jobs:
         run: |
           docker run --rm \
             -v "$PWD:/src" \
+            -w /src \
             fluidattacks/sast:latest \
-            sast --strict scan /src --config /src/fa/sast_strict.yml
+            sast --strict scan .
 
   sca-scan:
     name: Fluid Attacks SCA
@@ -33,6 +32,7 @@ jobs:
         run: |
           docker run --rm \
             -v "$PWD:/src" \
+            -w /src \
             fluidattacks/sca:latest \
-            sca --strict scan /src --config /src/fa/sca_strict.yml
+            sca --strict scan .
 
