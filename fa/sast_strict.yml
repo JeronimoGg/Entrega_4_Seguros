@@ -1,6 +1,4 @@
 mode: strict
-export:
-  format: txt
-  output: sast_result_strict.txt
+
 fail_on:
   severity: low

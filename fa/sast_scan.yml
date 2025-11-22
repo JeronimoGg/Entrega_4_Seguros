@@ -1,0 +1,5 @@
+args:
+  - scan
+  - /workspace
+  - --config
+  - /workspace/fa/sast_config.yml

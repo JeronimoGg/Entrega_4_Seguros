@@ -1,0 +1,6 @@
+mode: strict
+
+output:
+  formats:
+    - csv
+  path: ./fa/sca_output
