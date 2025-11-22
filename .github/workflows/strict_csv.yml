@@ -1,30 +1,55 @@
-name: Fluid Attacks SAST + SCA (strict, CSV)
-
+name: SAST y SCA Strict Config
+ 
 on:
+  push:
+  pull_request:
   workflow_dispatch:
-
+ 
 jobs:
-  sast:
+  sast-scan:
+    name: Fluid Attacks SAST
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Run SAST
+      - name: Checkout code
+        uses: actions/checkout@v4
+ 
+      - name: Run Fluid Attacks SAST
+        id: sast_scan
         run: |
           docker run --rm \
-            -v ${{ github.workspace }}:/src \
-            -w /src \
+            -v "$PWD:/src" \
             fluidattacks/sast:latest \
-            sast scan /src/fluidattacks-config.yaml
-  sca:
+            sast --strict scan /src/fluidattacks-config.yaml
+ 
+      - name: Upload SAST CSV
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sast-results
+          path: |
+            Fluid-Attacks-Results-sast.csv
+            **/*.csv
+ 
+  sca-scan:
+    name: Fluid Attacks SCA
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Run SCA
+      - name: Checkout code
+        uses: actions/checkout@v4
+ 
+      - name: Run Fluid Attacks SCA
+        id: sca_scan
         run: |
           docker run --rm \
-            -v ${{ github.workspace }}:/src \
-            -w /src \
+            -v "$PWD:/src" \
             fluidattacks/sca:latest \
-            sca scan /src/fluidattacks-config.yaml
+            sca --strict scan /src/fluidattacks-config.yaml
+ 
+      - name: Upload SCA CSV
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sca-results
+          path: |
+            Fluid-Attacks-Results-sca.csv
+            **/*.csv

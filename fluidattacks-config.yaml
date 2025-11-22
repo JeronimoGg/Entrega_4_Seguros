@@ -1,27 +1,29 @@
-namespace: wackopicko
-working_dir: /src
-language: ES
-
-# MODO ESTRICTO -> rompe el pipeline si encuentra vulnerabilidades
-strict: true
-
-# Exportar resultados a CSV
+namespace: Configuracion Flujo
+working_dir: .
+language: EN
+ 
 output:
-  file_path: /src/Fluid-Attacks-Results.csv
+  file_path: ./Fluid-Attacks-Results.csv
   format: CSV
-
-# Config SAST
+ 
+path:
+  include:
+    - .
+ 
 sast:
   include:
     - .
   exclude:
-    - glob(**/node_modules/**)
-    - glob(**/test/**)
-
-# Config SCA
+    - ./node_modules
+    - ./tests
+    - ./dist
+    - ./build
+ 
 sca:
   include:
     - .
   exclude:
-    - glob(**/node_modules/**)
-    - glob(**/tests/**)
+    - ./node_modules
+    - ./tests
+    - ./dist
+    - ./build
