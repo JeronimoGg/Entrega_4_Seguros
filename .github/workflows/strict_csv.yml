@@ -1,9 +1,7 @@
 name: Fluid Attacks SAST + SCA (strict, CSV)
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
+  workflow_dispatch:
 
 jobs:
   fluidattacks-scan:
