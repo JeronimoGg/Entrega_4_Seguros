@@ -53,3 +53,24 @@ jobs:
           path: |
             Fluid-Attacks-Results-sca.csv
             **/*.csv
+
+  owasp-dependency-check:
+    name: OWASP Dependency Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run OWASP Dependency-Check
+        uses: dependency-check/Dependency-Check_Action@v4.0.0
+        with:
+          project: "MiProyecto"
+          path: "."
+          format: "HTML,JSON"
+          out: "dependency-check-report"
+
+      - name: Upload OWASP report
+        uses: actions/upload-artifact@v4
+        with:
+          name: dependency-check-report
+          path: dependency-check-report
