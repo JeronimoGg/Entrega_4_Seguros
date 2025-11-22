@@ -64,7 +64,7 @@ jobs:
         with:
           project: "MiProyecto"
           path: "."
-          format: "HTML,JSON"
+          format: "HTML"
           out: "dependency-check-report"
 
       - name: Upload OWASP report
