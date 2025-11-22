@@ -1,4 +1,4 @@
-}name: Fluid Attacks SAST + SCA (strict, CSV)
+name: Fluid Attacks SAST + SCA (strict, CSV)
 
 on:
   workflow_dispatch:
