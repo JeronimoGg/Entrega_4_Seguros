@@ -1,7 +1,0 @@
-name: "Fluid Attacks SCA Strict"
-
-command:
-  args:
-    - "scan"
-    - "."
-    - "--strict"

@@ -1,6 +1,0 @@
-name: "Fluid Attacks SCA"
-
-command:
-  args:
-    - "scan"
-    - "."

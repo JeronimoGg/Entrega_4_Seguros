@@ -35,4 +35,3 @@ jobs:
             -w /src \
             fluidattacks/sca:latest \
             sca --strict scan .
-

@@ -1,20 +1,21 @@
-name: SAST & SCA Strict + CSV (Fail)
+name: Fluid Attacks SAST + SCA (strict, CSV)
+
 on:
-  workflow_dispatch:
+  push:
+    branches: [ main ]
+  pull_request:
 
 jobs:
-  scan:
+  fluidattacks-scan:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Run SAST (strict CSV)
-        uses: docker://fluidattacks/sast:latest
-        with:
-          args: scan /workspace --config /workspace/fa/sast_config.yml
-
-      - name: Run SCA (strict CSV)
-        uses: docker://fluidattacks/sca:latest
-        with:
-          args: scan /workspace --config /workspace/fa/sca_config.yml
+      - name: Run Fluid Attacks SAST + SCA with config
+        run: |
+          docker run --rm \
+            -v ${{ github.workspace }}:/src \
+            fluidattacks/cli:latest \
+            skims scan /src/fluidattacks-config.yaml

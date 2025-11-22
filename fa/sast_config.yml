@@ -1,9 +1,0 @@
-mode: strict
-
-fail_on:
-  severity: low
-
-output:
-  formats:
-    - csv
-  path: ./fa/sast_output
